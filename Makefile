@@ -14,11 +14,20 @@
 Q ?= @
 
 # VARIABLES
-NAME = result
-SOURCE = slides.md
-HIGHLIGHT = zenburn
-# Available highlight (for code): monokai, zenburn
-THEME = blood
+NAME ?= result
+SOURCE ?= slides.md
+HIGHLIGHT ?= breezedark
+# Available highlight (for code) by Pandoc
+# `pandoc --list-highlight-styles`
+# tango
+# pygments
+# kate
+# monochrome
+# espresso
+# zenburn
+# haddock
+# breezedark
+THEME ?= blood
 # Available themes
 # `ls reveal.js/css/theme/source -1|cut -d '.' -f 1`
 #
