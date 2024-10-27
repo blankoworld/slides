@@ -48,6 +48,7 @@ make build
 * [RevealJS theme list](https://revealjs.com/themes/)
 * [RevealJS example presentations](https://github.com/hakimel/reveal.js/wiki/Example-Presentations)
 * [Explore Slides](https://slides.com/explore): an online editor and hosting platform for reveal.js
+* [Color for Web browsers](https://www.w3schools.com/colors/colors_names.asp)
 
 # License
 
