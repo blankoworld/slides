@@ -1,0 +1,27 @@
+variables:
+  PANDOC_VERSION: 3.5-alpine
+  NAME: index
+  SOURCE: slides.md
+  HIGHLIGHT: breezedark
+  THEME: blood
+
+image:
+  name: pandoc/latex:${PANDOC_VERSION}
+  entrypoint: [""] # pour utiliser /bin/sh pour les commandes au lieu de /usr/bin/pandoc
+
+before_script:
+  - apk update
+  - apk add git make # outils nécessaires
+  - git config --global --add safe.directory $CI_PROJECT_DIR # permission du dossier pour git
+  - Q= make deps
+
+pages:
+  variables:
+    GIT_SUBMODULE_STRATEGY: normal # pour récupérer les sous-modules
+  script:
+    - Q= make html # compilation HTML
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
