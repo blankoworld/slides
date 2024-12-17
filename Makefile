@@ -52,17 +52,21 @@ THEME ?= blood
 # BEGIN
 all: deps
 
-deps:
+deps: public
 	$Qgit submodule update --init --recursive
 
 html: deps ${SOURCE}
-	$Qpandoc -t revealjs -s --embed-resources --standalone -o "${NAME}.html" "${SOURCE}" -V revealjs-url=./reveal.js -V theme="${THEME}" -V transition=slide -V slideNumber=true --slide-level=2 --highlight-style="${HIGHLIGHT}"
+	$Qpandoc -t revealjs -s --embed-resources --standalone -o "public/${NAME}.html" "${SOURCE}" -V revealjs-url=./reveal.js -V theme="${THEME}" -V transition=slide -V slideNumber=true --slide-level=2 --highlight-style="${HIGHLIGHT}"
 
 pdf: deps ${SOURCE}
-	$Qpandoc -V theme:Boadilla -V fontfamily="utopia" -V fontsize=11pt -V toc-title:'Table of content' --from=markdown --to=beamer -o "${NAME}.pdf" "${SOURCE}"
+	$Qpandoc -V theme:Boadilla -V fontfamily="utopia" -V fontsize=11pt -V toc-title:'Table of content' --from=markdown --to=beamer -o "public/${NAME}.pdf" "${SOURCE}"
 
 build: html pdf
+
+public:
+	$Qmkdir public
 
 # END
 clean:
 	$Qrm -f "${NAME}.html" "${NAME}.pdf"
+	$Qrm -rf public
