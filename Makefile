@@ -50,15 +50,15 @@ THEME ?= blood
 # But can be empowered by: https://slides.com/explore (revealJS online editor)
 
 # BEGIN
-all: reveal.js
+all: deps
 
-reveal.js:
+deps:
 	$Qgit submodule update --init --recursive
 
-html: reveal.js ${SOURCE}
+html: deps ${SOURCE}
 	$Qpandoc -t revealjs -s --embed-resources --standalone -o "${NAME}.html" "${SOURCE}" -V revealjs-url=./reveal.js -V theme="${THEME}" -V transition=slide -V slideNumber=true --slide-level=2 --highlight-style="${HIGHLIGHT}"
 
-pdf: reveal.js ${SOURCE}
+pdf: deps ${SOURCE}
 	$Qpandoc -V theme:Boadilla -V fontfamily="utopia" -V fontsize=11pt -V toc-title:'Table of content' --from=markdown --to=beamer -o "${NAME}.pdf" "${SOURCE}"
 
 build: html pdf
